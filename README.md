@@ -1,3 +1,3 @@
-# Learn Haskell by building a blog generator
+# Learning Haskell
 
-Following the [Learn Haskell](https://learn-haskell.blog) introduction to programming in Haskell.
+Following the [Learn Haskell by Building a Blog Generator](https://learn-haskell.blog) introduction to programming in Haskell.

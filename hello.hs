@@ -1,5 +1,4 @@
 -- hello.hs
--- currently on 3.4
 
 main :: IO ()
 main = putStrLn (render myhtml)
@@ -8,33 +7,49 @@ myhtml :: Html
 myhtml = 
     html_
         "Hello title"
-        (append_
-            (el "h1" "G'day!")
-            (el "p" "I am learning Haskell.")
+        ( append_
+            (h1_ "G'day!")
+            ( append_
+                (p_ "I am learning Haskell.")
+                (p_ "I suppose I am also learning some HTML.")
+            )
         )
+
+newtype Html = Html String
+
+newtype Structure = Structure String
+
+type Title = String
 
 html_ :: Title -> Structure -> Html
 html_ title content =
     Html (
-        append_
-            (Structure (el "head" (el "title" title)))
-            content
+        el "html" (
+            (el "head" (el "title" title))
+            <> el "body" (getStructureString content)
+        )
     )
 
-append_ :: Structure -> Structure -> Structure
-append_ (Structure str1) (Structure str2) =
-    Structure (str1 <> str2)
+p_ :: String -> Structure
+p_ = Structure . el "p"
 
-render :: Html -> String
-render html =
-    case html of
-        Html str -> str
+h1_ :: String -> Structure
+h1_ = Structure . el "h1"
 
 el :: String -> String -> String
 el tag content =
    "<" <> tag <> ">" <> content <> "</" <> tag <> ">"
 
-type Title = String
-newtype Html = Html String
-newtype Structure = Structure String
+append_ :: Structure -> Structure -> Structure
+append_ strc1 strc2 =
+    Structure ( getStructureString strc1  <> getStructureString strc2)
 
+getStructureString :: Structure -> String
+getStructureString content =
+    case content of
+        Structure str -> str
+
+render :: Html -> String
+render html =
+    case html of
+        Html str -> str

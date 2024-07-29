@@ -27,9 +27,20 @@ p_ = Structure . el "p" . escape
 h1_ :: String -> Structure
 h1_ = Structure . el "h1" . escape
 
+ul_ :: [Structure] -> Structure
+ul_ =
+    Structure . el "ul" . concat . map (el "li" . getStructureString)
+
+ol_ :: [Structure] -> Structure
+ol_ =
+    Structure . el "ol" . concat . map (el "li" . getStructureString)
+
+code_ :: String -> Structure
+code_ = Structure . el "pre" . escape
+
 append_ :: Structure -> Structure -> Structure
 append_ strc1 strc2 =
-    Structure ( getStructureString strc1  <> getStructureString strc2)
+    Structure (getStructureString strc1  <> getStructureString strc2)
 
 -- * Render
 

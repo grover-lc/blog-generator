@@ -1,4 +1,4 @@
-import Numeric
+import Numeric.Natural
 
 type Document = [Structure]
 
@@ -8,6 +8,13 @@ data Structure =
     | UnorderedList [String]
     | OrderedList [String]
     | CodeBlock [String]
+    deriving Show
+
+main :: IO ()
+main = print example1
+
+--print :: Show a => a -> IO ()
+--print = putStrLn . show
 
 example1 :: Document
 example1 =

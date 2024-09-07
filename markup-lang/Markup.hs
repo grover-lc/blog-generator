@@ -16,6 +16,10 @@ data Structure =
     | UnorderedList [String]
     | OrderedList [String]
     | CodeBlock [String]
+    deriving Show
+
+print :: Show a => a -> IO ()
+print = putStrLn . show
 
 parse :: String -> Document
 parse = parseLines [] . lines -- (1)

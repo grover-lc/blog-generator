@@ -10,7 +10,7 @@ module Html (
     code_ ,
     ul_ ,
     ol_ ,
-    append_ ,
+    -- append_ ,
     render ,
 )
 where

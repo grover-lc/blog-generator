@@ -9,10 +9,10 @@ myhtml :: Html
 myhtml = 
     html_
         "Hello title"
-        ( append_
-            (h1_ "G'day!")
-            ( append_
-                (p_ "I am learning Haskell.")
+        ( 
+            (h1_ "G'day!") <>
+            ( 
+                (p_ "I am learning Haskell.") <>
                 (p_ "I suppose I am also learning some HTML.")
             )
         )

@@ -38,9 +38,12 @@ ol_ =
 code_ :: String -> Structure
 code_ = Structure . el "pre" . escape
 
-append_ :: Structure -> Structure -> Structure
-append_ strc1 strc2 =
-    Structure (getStructureString strc1  <> getStructureString strc2)
+-- append_ :: Structure -> Structure -> Structure
+-- append_ strc1 strc2 =
+    -- Structure (getStructureString strc1  <> getStructureString strc2)
+instance Semigroup Structure where
+    (<>) c1 c2 =
+        Structure (getStructureString c1 <> getStructureString c2)
 
 -- * Render
 

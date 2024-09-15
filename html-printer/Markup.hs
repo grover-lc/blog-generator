@@ -45,7 +45,7 @@ parseLines context txts =
                 _ ->
                     maybe id (:) context (
                         parseLines (Just (UnorderedList [trim line])) rest
-                )
+                    )
 
         -- Ordered list cae
         ('#' : ' ' : line) : rest ->

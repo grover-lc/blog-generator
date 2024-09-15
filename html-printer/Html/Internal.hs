@@ -16,7 +16,7 @@ html_ :: Title -> Structure -> Html
 html_ title content =
     Html (
         el "html" (
-            (el "head" (el "title" (escape title)))
+            el "head" (el "title" (escape title))
             <> el "body" (getStructureString content)
         )
     )

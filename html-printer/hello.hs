@@ -10,9 +10,9 @@ myhtml =
     html_
         "Hello title"
         ( 
-            (h1_ "G'day!") <>
+            h1_ "G'day!" <>
             ( 
-                (p_ "I am learning Haskell.") <>
-                (p_ "I suppose I am also learning some HTML.")
+                p_ "I am learning Haskell." <>
+                p_ "I suppose I am also learning some HTML."
             )
         )

@@ -6,7 +6,7 @@ module Html (
     Structure ,
     html_ ,
     p_ ,
-    h1_ ,
+    h_ ,
     code_ ,
     ul_ ,
     ol_ ,

@@ -18,7 +18,7 @@ data Structure =
     | UnorderedList [String]
     | OrderedList [String]
     | CodeBlock [String]
-    deriving (Eq, Show) -- (1)
+    deriving (Eq, Show)
 
 
 parse :: String -> Document
@@ -47,7 +47,7 @@ parseLines context txts =
                         parseLines (Just (UnorderedList [trim line])) rest
                     )
 
-        -- Ordered list cae
+        -- Ordered list case
         ('#' : ' ' : line) : rest ->
             case context of
                 Just (OrderedList list) ->

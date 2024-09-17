@@ -56,6 +56,9 @@ instance Semigroup Structure where
     (<>) c1 c2 =
         Structure (getStructureString c1 <> getStructureString c2)
 
+instance Monoid Structure where
+    mempty = Structure ""
+
 -- * Render
 
 render :: Html -> String

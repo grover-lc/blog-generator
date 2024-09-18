@@ -2,7 +2,7 @@ cabal-version:       2.4
 
 name:                hs-blog
 version:             0.1.0.0
-synopsis:            Synopsis will appear in the hackage package listing and search
+synopsis:            A custom blog generator from markup files
 description:         This package provides a static blog generator
                      from a custom markup format to HTML.
                      It defines a parser for this custom markup format
@@ -46,6 +46,7 @@ executable hs-blog-gen
   main-is: Main.hs
   build-depends:
       base
+    , optparse-applicative
     , hs-blog
   ghc-options:
     -O

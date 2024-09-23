@@ -1,4 +1,4 @@
--- Html.hs
+-- src/HsBlog/Html.hs
 
 module HsBlog.Html
     ( Html

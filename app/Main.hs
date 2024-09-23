@@ -2,13 +2,12 @@
 
 module Main where
 
-import OptParse
 import qualified HsBlog
+import OptParse
 
 import System.Exit (exitFailure)
 import System.Directory (doesFileExist)
 import System.IO
-import Control.Exception (bracket)
 
 main :: IO ()
 main = do
@@ -17,34 +16,28 @@ main = do
         ConvertDir input output ->
             HsBlog.convertDirectory input output
         
-        ConvertSingle input output ->
-            let
-                withInputHandle :: (String -> Handle -> IO a) -> IO a
-                withInputHandle action =
-                    case input of
-                        Stdin -> action "" stdin
-                        InputFile file -> bracket
-                            (openFile file ReadMode)
-                            hClose
-                            (action file)
+        ConvertSingle input output -> do
+            (title, inputHandle) <-
+                case input of
+                    Stdin -> pure ("", stdin)
+                    InputFile file -> (,) file <$> openFile file ReadMode
+        
+        outputHandle <-
+            case output of
+                Stdout -> pure stdout
+                OutputFile file -> do
+                    exists <- doesFileExist file
+                    shouldOpenFile <-
+                        if exists
+                            then confirm
+                            else pure True
+                        if shouldOpenFile
+                            then openFile file WriteMode
+                            else exitFailure
 
-                withOutputHandle :: (Handle -> IO a) -> IO a
-                withOutputHandle action =
-                    case output of
-                        Stdout -> action stdout
-                        OutputFile file -> do
-                            exists <- doesFileExist file
-                            shouldOpenFile <- if exists
-                                then confirm
-                                else pure True
-                            if shouldOpenFile
-                                then bracket
-                                    (openFile file WriteMode) hClose action
-                                else exitFailure
-            in
-                withInputHandle (
-                    \title -> withOutputHandle . HsBlog.convertSingle title
-                )
+        HsBlog.convertSingle title inputHandle outputHandle
+        hClose inputHandle
+        hClose outputHandle
 
 ---------------------------------------
 -- * Utilities

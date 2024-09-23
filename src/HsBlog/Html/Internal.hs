@@ -1,4 +1,4 @@
--- Html/Internal.hs
+-- src/BsBlog/Html/Internal.hs
 
 module HsBlog.Html.Internal where
 

@@ -31,11 +31,6 @@ data SingleOutput
     | OutputFile FilePath
     deriving Show
 
--- | Input directory
-data ParseDigitError
-    = NotADigit Char
-    deriving Show
-
 ---------------------------------
 -- * Parser
 
@@ -111,21 +106,6 @@ pOutputFile = OutputFile <$> parser
 
 --------------------------------------
 -- * Directory conversion parser
-
-parseDigit :: Char -> Either ParseDigitError Int
-parseDigit c =
-    case c of
-        '0' -> Right 0
-        '1' -> Right 1
-        '2' -> Right 2
-        '3' -> Right 3
-        '4' -> Right 4
-        '5' -> Right 5
-        '6' -> Right 6
-        '7' -> Right 7
-        '8' -> Right 8
-        '9' -> Right 9
-        _ -> Left (NotADigit c)
 
 pConvertDir :: Parser Options
 pConvertDir =
